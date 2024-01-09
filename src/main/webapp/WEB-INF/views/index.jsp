@@ -37,57 +37,56 @@
             data-bs-target="#employeeModal">
         Add new
     </button>
-    <div class="modal fade" id="employeeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add new employee</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal fade" id="employeeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add new employee</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="employee/add" method="post">
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="emName" class="form-label">Name:</label>
+                                <input type="text"  class="form-control" id="emName" placeholder="Full name" name="name">
+                            </div>
+                            <div class="mb-3">
+                                <label for="DOB" class="form-label">DOB:</label>
+                                <input type="date" class="form-control" id="DOB" name="dob">
+                            </div>
+                            <div class="mb-3">
+                                <label for="department" class="form-label">Department:</label>
+                                <select class="form-select form-select" id="department" aria-label=".form-select-sm example" name="departmentId">
+                                    <c:forEach items="${departmentList}" var="x">
+                                        <option value="${x.id}" >${x.departmentName}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                            <div class="mb-3 d-flex">
+                                <div class="form-check me-2">
+                                    <input class="form-check-input" type="radio" name="gender"
+                                           id="rdoMale" checked value="true">
+                                    <label class="form-check-label" for="rdoMale">
+                                        Male
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gender"
+                                           id="rdoFemale" value="false">
+                                    <label class="form-check-label" for="rdoFemale">
+                                        Female
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
                 </div>
-                <form action="" method="post">
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="emName" class="form-label">Name:</label>
-                            <input type="text"  class="form-control" id="emName" placeholder="Full name">
-                        </div>
-                        <div class="mb-3">
-                            <label for="DOB" class="form-label">DOB:</label>
-                            <input type="date" class="form-control" id="DOB">
-                        </div>
-                        <div class="mb-3">
-                            <label for="department" class="form-label">Department:</label>
-                            <select class="form-select form-select" id="department" aria-label=".form-select-sm example">
-                                <option value="1" selected>One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                        </div>
-                        <div class="mb-3 d-flex">
-                            <div class="form-check me-2">
-                                <input class="form-check-input" type="radio" name="Male"
-                                       id="rdoMale" checked>
-                                <label class="form-check-label" for="rdoMale">
-                                    Male
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="Female"
-                                       id="rdoFemale" >
-                                <label class="form-check-label" for="rdoFemale">
-                                    Female
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                    </div>
-                </form>
             </div>
         </div>
-    </div>
-
     <table class="table table-bordered table-hover">
         <thead class="table-dark">
         <tr>
@@ -115,8 +114,10 @@
                 </td>
                 <td>${employee.dob}</td>
                 <td>${employee.department.departmentName}</td>
-                <td><a href="">Edit</a></td>
-                <td><a href="">Delete</a></td>
+                <td><a href="employee/edit/${employee.id}" data-bs-target="#employeeModal" >Edit</a></td>
+                <td>
+                    <a href="employee/delete/${employee.id}">Xóa</a>
+                </td>
             </tr>
             </c:forEach>
         </tbody>
@@ -126,5 +127,4 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
 </body>
-
 </html>

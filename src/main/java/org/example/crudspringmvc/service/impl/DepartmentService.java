@@ -1,6 +1,7 @@
 package org.example.crudspringmvc.service.impl;
 
 import org.example.crudspringmvc.dtos.DepartmentDTO;
+import org.example.crudspringmvc.dtos.EmployeeDTO;
 import org.example.crudspringmvc.repositories.IDepartmentRepository;
 import org.example.crudspringmvc.service.IDepartmentService;
 import org.modelmapper.ModelMapper;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class DepartmentService implements IDepartmentService {
@@ -25,7 +27,8 @@ public class DepartmentService implements IDepartmentService {
 
     @Override
     public DepartmentDTO getById(Long id) {
-        return null;
+        return mapper.map(repository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Not Found")), DepartmentDTO.class);
     }
 
     @Override
